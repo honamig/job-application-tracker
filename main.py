@@ -31,18 +31,31 @@ connection.commit()
 
 # connection.commit()
 
-print("Job application added successfully")
+#print("Job application added successfully")
 
 # Update the application status
+# cursor.execute("""
+#     UPDATE applications
+#     SET status = ?
+#     WHERE id = ?
+# """, ("Interview", 1))
+
+# connection.commit()
+
+# print("Application status updated successfully")
+
+# Delete a job application
 cursor.execute("""
-    UPDATE applications
-    SET status = ?
+    DELETE FROM applications
     WHERE id = ?
-""", ("Interview", 1))
+""", (3,))
+
+if cursor.rowcount > 0:
+    print("Job application deleted successfully")
+else:
+    print("Application not found")
 
 connection.commit()
-
-print("Application status updated successfully")
 
 # Get all job applications
 cursor.execute("SELECT * FROM applications")
